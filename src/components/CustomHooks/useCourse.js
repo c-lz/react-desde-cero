@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import axios from "axios";
 
-const useCourse = id => {
+const useCourse = (id) => {
 
     const [course, setCourse] = useState({})
 
@@ -10,7 +10,7 @@ const useCourse = id => {
         .then(resp => setCourse(resp.data))
       }, [])
 
-    return course  
+    return course
 }
 
 export default useCourse

@@ -45,12 +45,12 @@ class Form extends Component {
                             <label>Nombre completo</label>
                             <input
                                 type="text"
-                                onChange={this.changeName} 
+                                onChange={this.changeName}
                             />
                         </div>
                         <div className="form__item">
                             <label>Correo Electrónico</label>
-                            <input 
+                            <input
                                 type="email"
                                 onChange={this.cambiarCorreo}
                             />
@@ -58,14 +58,13 @@ class Form extends Component {
                     </div>
                 </form>
                 <div>
-                    <h2>{`Hola ${this.state.nombre}`}</h2>
+                    <h2>{`Hola ${this.state.name}`}</h2>
                     <span>{`Tu correo es: ${this.state.correo}`}</span>
                 </div>
             </div>
         )
     }
-    
-    
+
     componentDidMount() {
         let element = document.getElementById("form-element")
         console.log(element)
@@ -74,7 +73,7 @@ class Form extends Component {
         this.intervaloFecha = setInterval(() => {
             this.cambiarFecha()
             console.log(new Date())
-        }, 1000)    
+        }, 1000)
 
     }
 

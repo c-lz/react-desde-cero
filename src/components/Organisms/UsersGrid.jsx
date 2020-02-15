@@ -13,7 +13,7 @@ const UsersGrid = ({users}) => (
                         name={u.name}
                         username={u.username}
                         email={u.email}
-                    /> 
+                    />
                 ))
             }
         </div>

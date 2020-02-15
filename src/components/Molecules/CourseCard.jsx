@@ -1,8 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from "react-router-dom"
+import { addToCart, deleteFromCart } from '../../redux/actionCreators'
+import { connect } from 'react-redux'
 
-const CourseCard = ({id, title, image, price, professor}) => (
+const CourseCard = ({id, title, image, price, professor, addCourseToCart, deleteCourseFromCart, cart}) => (
     <article className="card">
         <div className="img-container s-ratio-16-9 s-radius-tr s-radius-tl">
             <Link to={`/cursos/${id}`}>
@@ -15,7 +17,20 @@ const CourseCard = ({id, title, image, price, professor}) => (
                 { professor }
             </div>
             <div className="s-main-center">
-                <a className="button--ghost-alert button--tiny" href="https://ed.team">{ `$ ${price} USD`} </a>
+                <button
+                    className="button--ghost-alert button--tiny"
+                    onClick={
+                            cart.find(a => a === id)?
+                            ()=>deleteCourseFromCart(id):
+                            ()=>addCourseToCart(id)
+                        }
+                >
+                    {
+                        cart.find(a => a === id)?
+                        'Remover del carrito':
+                        `$ ${price} USD`
+                    }
+                </button>
             </div>
         </div>
     </article>
@@ -35,4 +50,16 @@ CourseCard.defaultProps = {
     profesor: ""
 }
 
-export default CourseCard
+const
+    mapStateToProps=state=>({
+        cart: state.cartReducer.cart
+    }),
+    mapDispatchToProps=dispatch=>({
+        addCourseToCart(id){
+            dispatch(addToCart(id))
+        },
+        deleteCourseFromCart(id){
+            dispatch(deleteFromCart(id))
+        }
+    })
+export default connect(mapStateToProps,mapDispatchToProps)(CourseCard);
